@@ -35,7 +35,7 @@ create:
 	ifname=pppoe$VAR(@)
 	logfile=/var/log/vyatta/ppp_${ifname}.log
 	sudo touch $logfile
-	sudo chgrp adm $logfile
+	sudo chgrp vyattacfg $logfile
 	sudo chmod 664 $logfile
 	echo "`date`: PPP interface $ifname created" >> $logfile
 
@@ -49,6 +49,7 @@ create:
 	sudo sh -c "echo mru 1492  >> /etc/ppp/peers/pppoe$VAR(@)"
         sudo sh -c "echo defaultroute  >> /etc/ppp/peers/pppoe$VAR(@)"
 	sudo sh -c "echo usepeerdns  >> /etc/ppp/peers/pppoe$VAR(@)"
+	sudo sh -c "echo ifname pppoe$VAR(@) >> /etc/ppp/peers/pppoe$VAR(@)"
 	sudo sh -c "echo ipparam pppoe$VAR(@) >> /etc/ppp/peers/pppoe$VAR(@)"
 	sudo sh -c "echo debug  >> /etc/ppp/peers/pppoe$VAR(@)"
 	sudo sh -c "echo logfile $logfile  >> /etc/ppp/peers/pppoe$VAR(@)"
